@@ -18,6 +18,14 @@ class SteganographCtrl {
 
   submit() async => _dt.rxForm.submit();
 
+  Future<void> shareFile() async {
+    final result = await Share.shareXFiles([XFile(_dt.rxImageFile.st!.path)], text: 'Great picture');
+
+    if (result.status == ShareResultStatus.success) {
+      print('Thank you for sharing the picture!');
+    }
+  }
+
   Future<void> hideMessage() async {
     // if (_dt.rxImageFile.st == null) {
     //   _showSnackBar(context, 'Please select an image first.');

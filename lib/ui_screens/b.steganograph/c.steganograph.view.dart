@@ -48,6 +48,12 @@ class SteganographView extends StatelessWidget {
                                 const SteganographHideMessage(),
                                 const SizedBox(height: 15),
                                 ElevatedButton(
+                                  onPressed: () {
+                                    _ct.shareFile();
+                                  },
+                                  child: const Text('Share Image'),
+                                ),
+                                ElevatedButton(
                                   onPressed: () => _ct.revealMessage(context),
                                   child: const Text('Reveal Message'),
                                 ),

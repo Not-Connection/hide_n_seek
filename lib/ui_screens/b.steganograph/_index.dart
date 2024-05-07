@@ -4,6 +4,7 @@ import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:hide_n_seek/ui_widgets/spaces/_index.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:share_plus/share_plus.dart';
 import 'package:states_rebuilder/states_rebuilder.dart';
 import 'package:steganograph/steganograph.dart';
 
