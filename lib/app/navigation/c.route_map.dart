@@ -9,5 +9,6 @@ class RouteMap {
     Routes.sampleDua: (RouteData data) => const SampleDuaView(),
     Routes.sampleTiga: (RouteData data) => const SampleTigaView(),
     Routes.steganograph: (RouteData data) => const SteganographView(),
+    Routes.seekImage: (RouteData data) => const SeekImageView(),
   };
 }

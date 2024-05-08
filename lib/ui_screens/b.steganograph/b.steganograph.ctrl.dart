@@ -11,8 +11,7 @@ class SteganographCtrl {
     final picker = ImagePicker();
     final pickedImage = await picker.pickImage(source: ImageSource.gallery);
     if (pickedImage != null) {
-      _dt.rxImageFile.st = File(pickedImage.path);
-      logx.w(_dt.rxImageFile.st!.path.toString());
+      _dt.rxPickedFile.st = pickedImage;
     }
   }
 
@@ -37,12 +36,14 @@ class SteganographCtrl {
     //   return;
     // }
 
+    _dt.rxImageFile.st = File(_dt.rxPickedFile.st!.path);
     Steganograph.encode(image: File(_dt.rxImageFile.st!.path), message: message).then((encodedImage) {
       _dt.rxImageFile.st = File(encodedImage!.path);
       logx.wtf(_dt.rxImageFile.st!.path.toString());
       _dt.rxMessage.reset();
       _dt.rxHiddenMessage.st = 'Message hidden successfully!';
     });
+
     // .catchError((error) {
     //   _showSnackBar(context, 'Error: $error');
     // });

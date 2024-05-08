@@ -6,4 +6,5 @@ abstract class Ctrl {
   static SampleDuaCtrl get sampleDua => SampleDuaCtrl();
   static SampleTigaCtrl get sampleTiga => SampleTigaCtrl();
   static SteganographCtrl get steganograph => SteganographCtrl();
+  static SeekImageCtrl get seekImage => SeekImageCtrl();
 }

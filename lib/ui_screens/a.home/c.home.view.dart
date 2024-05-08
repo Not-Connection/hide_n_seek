@@ -15,25 +15,16 @@ class HomeView extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            // HomeCharlie(),
-            // HomeDelta(),
-            // HomeEcho(),
             ElevatedButton(
-              onPressed: () => nav.to(Routes.sampleSatu),
+              onPressed: () => nav.to(Routes.steganograph),
               child: const Text(
-                "to sample_satu",
+                "Hide Image",
               ),
             ),
             ElevatedButton(
-              onPressed: () => nav.to(Routes.sampleDua),
+              onPressed: () => nav.to(Routes.seekImage),
               child: const Text(
-                "to sample_dua",
-              ),
-            ),
-            ElevatedButton(
-              onPressed: () => nav.to(Routes.sampleTiga),
-              child: const Text(
-                "to sample_tiga",
+                "Seek Image",
               ),
             ),
           ],
