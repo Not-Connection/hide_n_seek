@@ -20,8 +20,6 @@
     "*analysis_options.*": true,
     "*android": true,
     "*android.*": true,
-    "*assets": true,
-    "*assets.*": true,
     "*build": true,
     "*build.*": true,
     "*hide_n_seek": true,

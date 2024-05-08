@@ -5,10 +5,7 @@ class RouteMap {
 
   static final data = {
     Routes.home: (RouteData data) => const HomeView(),
-    Routes.sampleSatu: (RouteData data) => const SampleSatuView(),
-    Routes.sampleDua: (RouteData data) => const SampleDuaView(),
-    Routes.sampleTiga: (RouteData data) => const SampleTigaView(),
-    Routes.steganograph: (RouteData data) => const SteganographView(),
-    Routes.seekImage: (RouteData data) => const SeekImageView(),
+    Routes.hide: (RouteData data) => const HideView(),
+    Routes.seek: (RouteData data) => const SeekView(),
   };
 }

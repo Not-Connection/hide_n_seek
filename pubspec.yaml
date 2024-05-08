@@ -21,6 +21,7 @@ dependencies:
   steganograph: ^1.0.0
   image_picker: ^1.1.1
   share_plus: ^9.0.0
+  image: ^4.1.7
 
 dev_dependencies:
   flutter_test:
