@@ -24,7 +24,7 @@ class HideImageSelected extends StatelessWidget {
                       HideFormMessage(),
                       SizedBoxH(20),
                       HideButton(),
-                      SizedBox(height: 15),
+                      SizedBoxH(15),
                       HideResult(),
                     ],
                   ),

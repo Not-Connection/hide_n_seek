@@ -17,9 +17,14 @@ class HomeView extends StatelessWidget {
           children: [
             Image.asset('assets/images/hidenseek.png'),
             Container(
+              decoration: const BoxDecoration(
+                  color: Colors.black54,
+                  borderRadius: BorderRadius.only(
+                    topRight: Radius.circular(30),
+                    topLeft: Radius.circular(30),
+                  )),
               width: double.infinity,
               height: 300,
-              color: Colors.black54,
               child: Padding(
                 padding: const EdgeInsets.all(10),
                 child: Column(

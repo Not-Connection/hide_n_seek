@@ -13,10 +13,12 @@ class HideData {
 
   final rxHiddenMessage = RM.inject<String>(() => '');
 
+  final rxIsLoading = RM.inject<bool>(() => false);
+
   final rxForm = RM.injectForm(
     submit: () async {
-      await Future.delayed(500.milliseconds);
       await _ct.hideMessage();
+      // await Future.delayed(600.milliseconds);
     },
     autovalidateMode: AutovalidateMode.onUserInteraction,
   );

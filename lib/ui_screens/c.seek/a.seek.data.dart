@@ -15,7 +15,6 @@ class SeekData {
 
   final rxForm = RM.injectForm(
     submit: () async {
-      await Future.delayed(500.milliseconds);
       await _ct.revealMessage();
     },
     autovalidateMode: AutovalidateMode.onUserInteraction,

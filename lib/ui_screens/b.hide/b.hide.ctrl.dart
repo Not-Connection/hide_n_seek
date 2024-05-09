@@ -7,6 +7,25 @@ class HideCtrl {
 
   updateRandom() => Serv.sample.updateRandom();
 
+  void showImagePreview(String name, String path) {
+    nav.toDialog(
+      CupertinoAlertDialog(
+        title: Text(
+          name,
+        ),
+        content: Padding(
+          padding: const EdgeInsets.only(top: 10),
+          child: SizedBox(
+            height: 200,
+            child: Image.file(
+              File(path),
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+
   Future<void> pickImage(ImageSource source) async {
     final picker = ImagePicker();
     final pickedImage = await picker.pickImage(source: source);
@@ -59,10 +78,9 @@ class HideCtrl {
     _dt.rxImageFile.st = File(_dt.rxPickedFile.st!.path);
     Steganograph.encode(image: File(_dt.rxImageFile.st!.path), message: message).then((encodedImage) {
       _dt.rxImageFile.st = File(encodedImage!.path);
-      _pv.rxPreviousImage.st = XFile(_dt.rxImageFile.st!.path);
-      logx.wtf(_dt.rxImageFile.st!.path.toString());
-      _dt.rxMessage.reset();
       _dt.rxHiddenMessage.st = 'Message hidden successfully!';
+      _dt.rxMessage.reset();
+      _pv.rxPreviousImage.st = XFile(_dt.rxImageFile.st!.path);
     });
   }
 

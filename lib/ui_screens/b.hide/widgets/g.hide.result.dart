@@ -35,6 +35,12 @@ class HideResult extends StatelessWidget {
                     File('${_dt.rxImageFile.st?.path}'),
                   ),
                 ),
+                onTap: () {
+                  _ct.showImagePreview(
+                    'Encoded Image',
+                    _dt.rxImageFile.st!.path,
+                  );
+                },
                 title: const Text(
                   'Encoded Image',
                   textScaler: TextScaler.linear(0.7),
@@ -51,11 +57,11 @@ class HideResult extends StatelessWidget {
                       },
                     ),
                     const SizedBoxW(10),
-                    IconButton(
-                      tooltip: 'Download Image',
-                      icon: const Icon(Icons.download),
-                      onPressed: () {},
-                    ),
+                    // IconButton(
+                    //   tooltip: 'Download Image',
+                    //   icon: const Icon(Icons.download),
+                    //   onPressed: () {},
+                    // ),
                   ],
                 ),
               ),

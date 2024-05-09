@@ -20,6 +20,12 @@ class HidePickedImageTile extends StatelessWidget {
           _dt.rxPickedFile.st!.name,
           overflow: TextOverflow.ellipsis,
         ),
+        onTap: () {
+          _ct.showImagePreview(
+            _dt.rxPickedFile.st!.name,
+            _dt.rxPickedFile.st!.path,
+          );
+        },
         trailing: IconButton(
           onPressed: () {
             nav.toDialog(
