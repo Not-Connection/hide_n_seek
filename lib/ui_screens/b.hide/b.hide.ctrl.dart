@@ -42,7 +42,10 @@ class HideCtrl {
   submit() async => _dt.rxForm.submit();
 
   Future<void> shareFile(BuildContext context) async {
-    final result = await Share.shareXFiles([XFile(_dt.rxImageFile.st!.path)], text: 'Great picture');
+    final result = await Share.shareXFiles(
+      [XFile(_dt.rxImageFile.st!.path)],
+      text: 'Check this out',
+    );
 
     if (result.status == ShareResultStatus.success) {
       // ignore: use_build_context_synchronously
@@ -56,6 +59,7 @@ class HideCtrl {
     _dt.rxImageFile.st = File(_dt.rxPickedFile.st!.path);
     Steganograph.encode(image: File(_dt.rxImageFile.st!.path), message: message).then((encodedImage) {
       _dt.rxImageFile.st = File(encodedImage!.path);
+      _pv.rxPreviousImage.st = XFile(_dt.rxImageFile.st!.path);
       logx.wtf(_dt.rxImageFile.st!.path.toString());
       _dt.rxMessage.reset();
       _dt.rxHiddenMessage.st = 'Message hidden successfully!';

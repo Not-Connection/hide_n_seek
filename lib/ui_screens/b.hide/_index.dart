@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:hide_n_seek/dt_domains/_index.dart';
 import 'package:hide_n_seek/ui_widgets/spaces/_index.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:share_plus/share_plus.dart';
@@ -24,3 +25,4 @@ part 'widgets/g.hide.result.dart';
 
 HideData get _dt => Data.hide.st;
 HideCtrl get _ct => Ctrl.hide;
+SteganographProv get _pv => Prov.steganograph.st;

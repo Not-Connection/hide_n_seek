@@ -5,12 +5,36 @@ class SeekImageButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return FloatingActionButton(
-      child: const Icon(Icons.add),
-      onPressed: () {
-        _ct.increaseCounter();
-        _ct.updateRandom();
-      },
+    return Column(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        SizedBox(
+          height: 200,
+          child: InkWell(
+            child: Image.asset('assets/images/gallery.png'),
+          ),
+        ),
+        ElevatedButton.icon(
+          icon: const Icon(Icons.add),
+          label: const Text('Add Image'),
+          onPressed: () async {
+            if (_pv.rxPreviousImage.st == null) {
+              await _ct.pickImage();
+            }
+            nav.toDialog(
+              _ct.imagePickerDialog(onPreviousImagePressed: () {
+                _dt.rxPickedFile.st = _sv.pickedPreviousEncodedImage();
+                nav.back();
+              }, onGalleryPressed: () async {
+                await _ct.pickImage();
+                nav.back();
+              }),
+            );
+          },
+        ),
+        const SizedBoxH(20),
+        const Text('It\'s empty! Add an image to start Decoding.'),
+      ],
     );
   }
 }

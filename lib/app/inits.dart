@@ -6,4 +6,5 @@ Future<void> inits() async {
   Serv.sample.init();
 
   logx.wtf('inits success');
+  Serv.steganograph.init();
 }

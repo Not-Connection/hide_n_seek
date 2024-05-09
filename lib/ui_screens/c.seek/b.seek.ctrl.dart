@@ -7,40 +7,116 @@ class SeekCtrl {
 
   updateRandom() => Serv.sample.updateRandom();
 
-  Future<void> pickImage(ImageSource source) async {
+  Future<void> pickImage() async {
     final picker = ImagePicker();
-    final pickedImage = await picker.pickImage(source: source);
-    if (pickedImage != null) {
-      _dt.rxPickedFile.st = pickedImage;
-    }
-    //  final image = img.decodeImage( File('${_dt.rxPickedFile.st?.path}').readAsBytesSync());
-    //     ui.Image imageN;
-    //       final paint = await PaintingBinding.instance.instantiateImageCodec(img.encodePng(image!, level: 0));
-    //       final nextFrame = await paint.getNextFrame();
-    //       imageN = nextFrame.image;
+    final pickedImage = await picker.pickImage(source: ImageSource.gallery);
+    _dt.rxPickedFile.st = pickedImage;
 
-    //     return imageN;
+    if (_dt.rxPickedFile.st == null) {
+      logx.e('image is empty');
+      return;
+    }
+
+    //* convert image's type to PNG
+    File imagePath = File(_dt.rxPickedFile.st!.path);
+    final tempDir = await getTemporaryDirectory();
+
+    int rand = Random().nextInt(10000);
+
+    if (_dt.rxPickedFile.st!.mimeType != 'image/png') {
+      img.Image? imageRaw = img.decodeImage(imagePath.readAsBytesSync());
+      File compressedImage = File('${tempDir.path}/img_$rand.png')..writeAsBytesSync(img.encodePng(imageRaw!));
+      logx.wtf(compressedImage.path.toString());
+
+      _dt.rxImagePathRaw.st = compressedImage.path;
+    } else {
+      _dt.rxImagePathRaw.st = _dt.rxPickedFile.st!.path;
+    }
   }
 
   submit() async => _dt.rxForm.submit();
 
-  Future<void> revealMessage(BuildContext context) async {
-    if (_dt.rxImageFile.st == null) {
-      _showSnackBar(context, 'Please select an image first.');
-      return;
+  Future<void> revealMessage() async {
+    if (_pv.rxPreviousImage.st != null) {
+      _dt.rxImagePathRaw.st = _dt.rxPickedFile.st!.path;
     }
+    _dt.rxImageFile.st = File(_dt.rxImagePathRaw.st);
+
+    logx.w(_dt.rxImageFile.st!.path.toString());
 
     Steganograph.decode(image: File(_dt.rxImageFile.st!.path)).then((decodedMessage) {
-      _dt.rxMessage.controller.text = decodedMessage!;
+      logx.i('decode message: $decodedMessage');
+      if (decodedMessage != null) {
+        _dt.rxMessage.controller.text = decodedMessage;
+      } else {
+        nav.toDialog(
+          CupertinoAlertDialog(
+            title: const Text('Warning!'),
+            content: const Text(
+              'Image not supported. Try to pick another image that may contain a hidden message',
+            ),
+            actions: [
+              TextButton(
+                onPressed: () => nav.back(),
+                child: const Text('Later'),
+              ),
+              TextButton(
+                onPressed: () async {
+                  await _ct.pickImage();
+                  nav.back();
+                },
+                child: const Text('Pick Another'),
+              )
+            ],
+          ),
+        );
+      }
     }).catchError((error) {
-      _showSnackBar(context, 'Error: $error');
+      nav.toDialog(
+        CupertinoAlertDialog(
+          title: const Text('Error Message'),
+          content: Text(
+            'Error: $error',
+          ),
+          actions: [
+            TextButton(
+              onPressed: () => nav.back(),
+              child: const Text('GOT IT'),
+            ),
+          ],
+        ),
+      );
     });
   }
 
-  void _showSnackBar(BuildContext context, String message) {
+  void showSnackBar(BuildContext context, String message) {
     ScaffoldMessenger.of(context).showSnackBar(SnackBar(
       content: Text(message),
       duration: const Duration(seconds: 2),
     ));
+  }
+
+  Widget imagePickerDialog({
+    Function()? onPreviousImagePressed,
+    Function()? onGalleryPressed,
+  }) {
+    return AlertDialog(
+      title: const Text('Pick a source'),
+      content: Column(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          ListTile(
+            leading: const Icon(Icons.image),
+            title: const Text('Use Previous Encoded Image'),
+            onTap: onPreviousImagePressed,
+          ),
+          ListTile(
+            leading: const Icon(Icons.image),
+            title: const Text('Gallery'),
+            onTap: onGalleryPressed,
+          ),
+        ],
+      ),
+    );
   }
 }

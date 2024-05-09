@@ -18,6 +18,32 @@ class SeekHiddenMessage extends StatelessWidget {
           alignLabelWithHint: true,
           labelText: 'Message',
           errorText: _dt.rxMessage.error,
+          suffixIcon: OnReactive(
+            () => _dt.rxMessage.text.isNotEmpty
+                ? IconButton(
+                    tooltip: 'Copy to Clipboard',
+                    onPressed: () {
+                      FlutterClipboard.copy(_dt.rxMessage.text).then(
+                        (value) => ScaffoldMessenger.of(context).showSnackBar(
+                          SnackBar(
+                            duration: const Duration(seconds: 2),
+                            content: const Text(
+                              'Text Copied',
+                              textAlign: TextAlign.center,
+                            ),
+                            behavior: SnackBarBehavior.floating,
+                            width: 120,
+                            backgroundColor: Theme.of(context).colorScheme.primary,
+                          ),
+                        ),
+                      );
+                    },
+                    icon: const Icon(
+                      Icons.copy_rounded,
+                    ),
+                  )
+                : const SizedBox.shrink(),
+          ),
         ),
       ),
     );

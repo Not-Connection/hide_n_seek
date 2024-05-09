@@ -9,12 +9,14 @@ class SeekData {
 
   final rxImageFile = RM.inject<File?>(() => null);
 
+  final rxImagePathRaw = RM.inject<String>(() => '');
+
   final rxPickedFile = RM.inject<XFile?>(() => null);
 
   final rxForm = RM.injectForm(
     submit: () async {
       await Future.delayed(500.milliseconds);
-      // await _ct.hideMessage();
+      await _ct.revealMessage();
     },
     autovalidateMode: AutovalidateMode.onUserInteraction,
   );

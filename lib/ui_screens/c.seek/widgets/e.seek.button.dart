@@ -16,7 +16,7 @@ class SeekButton extends StatelessWidget {
           child: ElevatedButton.icon(
             icon: const Icon(Icons.lock_open),
             label: const Text('Reveal Message'),
-            onPressed: _ct.submit(),
+            onPressed: () => _ct.submit(),
           ),
         );
       },

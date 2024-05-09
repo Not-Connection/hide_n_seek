@@ -1,9 +1,12 @@
 import 'dart:io';
-import 'dart:ui' as ui;
+import 'dart:math';
 
+import 'package:clipboard/clipboard.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:hide_n_seek/dt_domains/_index.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:path_provider/path_provider.dart';
 import 'package:states_rebuilder/states_rebuilder.dart';
 import 'package:steganograph/steganograph.dart';
 import 'package:image/image.dart' as img;
@@ -24,3 +27,5 @@ part 'widgets/f.seek.hidden_message.dart';
 
 SeekData get _dt => Data.seek.st;
 SeekCtrl get _ct => Ctrl.seek;
+SteganographServ get _sv => Serv.steganograph;
+SteganographProv get _pv => Prov.steganograph.st;
