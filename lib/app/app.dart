@@ -6,7 +6,7 @@ class App extends TopStatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp.router(
-      title: 'NC Flutter Template',
+      title: 'HideNSeek',
       debugShowCheckedModeBanner: true,
       theme: themeRM.darkTheme,
       routeInformationParser: nav.routeInformationParser,
