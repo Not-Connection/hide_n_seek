@@ -12,61 +12,63 @@ class HomeView extends StatelessWidget {
       // ),
       // floatingActionButton: HomeFab(),
       body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.end,
-          children: [
-            Image.asset('assets/images/hidenseek.png'),
-            Container(
-              decoration: const BoxDecoration(
-                  color: Colors.black54,
-                  borderRadius: BorderRadius.only(
-                    topRight: Radius.circular(30),
-                    topLeft: Radius.circular(30),
-                  )),
-              width: double.infinity,
-              height: 300,
-              child: Padding(
-                padding: const EdgeInsets.all(10),
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Text(
-                      'Send Your Secret Messages Through Images',
-                      textScaler: const TextScaler.linear(1.5),
-                      textAlign: TextAlign.center,
-                      style: TextStyle(
-                        color: Colors.white.withOpacity(0.3),
+        child: SingleChildScrollView(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.end,
+            children: [
+              Image.asset('assets/images/hidenseek.png'),
+              Container(
+                decoration: const BoxDecoration(
+                    color: Colors.black54,
+                    borderRadius: BorderRadius.only(
+                      topRight: Radius.circular(30),
+                      topLeft: Radius.circular(30),
+                    )),
+                width: double.infinity,
+                height: 300,
+                child: Padding(
+                  padding: const EdgeInsets.all(10),
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Text(
+                        'Send Your Secret Messages Through Images',
+                        textScaler: const TextScaler.linear(1.5),
+                        textAlign: TextAlign.center,
+                        style: TextStyle(
+                          color: Colors.white.withOpacity(0.3),
+                        ),
                       ),
-                    ),
-                    const SizedBoxH(20),
-                    OutlinedButton.icon(
-                      icon: const Icon(Icons.visibility_off),
-                      style: OutlinedButton.styleFrom(
-                        fixedSize: const Size.fromWidth(150),
+                      const SizedBoxH(20),
+                      OutlinedButton.icon(
+                        icon: const Icon(Icons.visibility_off),
+                        style: OutlinedButton.styleFrom(
+                          fixedSize: const Size.fromWidth(150),
+                        ),
+                        onPressed: () => nav.to(Routes.hide),
+                        label: const Text(
+                          "Hide",
+                          textScaler: TextScaler.linear(1.2),
+                        ),
                       ),
-                      onPressed: () => nav.to(Routes.hide),
-                      label: const Text(
-                        "Hide",
-                        textScaler: TextScaler.linear(1.2),
+                      const SizedBoxH(10),
+                      OutlinedButton.icon(
+                        icon: const Icon(Icons.visibility),
+                        style: OutlinedButton.styleFrom(
+                          fixedSize: const Size.fromWidth(150),
+                        ),
+                        onPressed: () => nav.to(Routes.seek),
+                        label: const Text(
+                          "Seek",
+                          textScaler: TextScaler.linear(1.2),
+                        ),
                       ),
-                    ),
-                    const SizedBoxH(10),
-                    OutlinedButton.icon(
-                      icon: const Icon(Icons.visibility),
-                      style: OutlinedButton.styleFrom(
-                        fixedSize: const Size.fromWidth(150),
-                      ),
-                      onPressed: () => nav.to(Routes.seek),
-                      label: const Text(
-                        "Seek",
-                        textScaler: TextScaler.linear(1.2),
-                      ),
-                    ),
-                  ],
+                    ],
+                  ),
                 ),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
     );
