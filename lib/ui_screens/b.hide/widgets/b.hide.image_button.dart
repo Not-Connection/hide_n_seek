@@ -25,8 +25,8 @@ class HideImageButton extends StatelessWidget {
                 await _ct.pickImage(ImageSource.camera);
                 nav.back();
               }, onGalleryPressed: () async {
-                await _ct.pickImage(ImageSource.gallery);
                 nav.back();
+                await _ct.pickImage(ImageSource.gallery);
               }),
             );
           },

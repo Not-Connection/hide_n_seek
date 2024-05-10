@@ -26,8 +26,8 @@ class SeekImageButton extends StatelessWidget {
                   _dt.rxPickedFile.st = _sv.pickedPreviousEncodedImage();
                   nav.back();
                 }, onGalleryPressed: () async {
-                  await _ct.pickImage();
                   nav.back();
+                  await _ct.pickImage();
                 }),
               );
             }

@@ -7,6 +7,8 @@ class HideData {
 
   final rxRandom = Prov.sample.st.rxRandom;
 
+  final rxIsUseEncryptKey = RM.inject<bool>(() => false);
+
   final rxImageFile = RM.inject<File?>(() => null);
 
   final rxPickedFile = RM.inject<XFile?>(() => null);
@@ -17,10 +19,18 @@ class HideData {
 
   final rxForm = RM.injectForm(
     submit: () async {
+      await Future.delayed(200.milliseconds);
       await _ct.hideMessage();
-      // await Future.delayed(600.milliseconds);
     },
     autovalidateMode: AutovalidateMode.onUserInteraction,
+  );
+
+  final rxEncryptionKey = RM.injectTextEditing(
+    validateOnTyping: true,
+    validators: [
+      Validate.isNotEmpty,
+      Validate.mustBeEqual,
+    ],
   );
 
   final rxMessage = RM.injectTextEditing(

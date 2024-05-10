@@ -20,6 +20,19 @@ class HideFormMessage extends StatelessWidget {
           labelText: 'Message',
           hintText: 'Enter the message you want to hide',
           errorText: _dt.rxMessage.error,
+          suffixIcon: OnReactive(
+            () => _dt.rxMessage.text.isNotEmpty
+                ? IconButton(
+                    tooltip: 'Clear',
+                    onPressed: () {
+                      _dt.rxMessage.reset();
+                    },
+                    icon: const Icon(
+                      Icons.close,
+                    ),
+                  )
+                : const SizedBox.shrink(),
+          ),
         ),
       ),
     );

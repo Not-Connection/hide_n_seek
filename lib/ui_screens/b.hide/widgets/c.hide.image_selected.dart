@@ -15,17 +15,32 @@ class HideImageSelected extends StatelessWidget {
             child: OnFormBuilder(
               listenTo: _dt.rxForm,
               builder: () {
-                return const SingleChildScrollView(
+                return SingleChildScrollView(
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      HidePickedImageTile(),
-                      SizedBoxH(20),
-                      HideFormMessage(),
-                      SizedBoxH(20),
-                      HideButton(),
-                      SizedBoxH(15),
-                      HideResult(),
+                      const HidePickedImageTile(),
+                      const SizedBoxH(20),
+                      const HideFormMessage(),
+                      const SizedBoxH(10),
+                      OnReactive(
+                        () => Row(
+                          children: [
+                            Checkbox(
+                              value: _dt.rxIsUseEncryptKey.st,
+                              onChanged: (value) {
+                                _dt.rxIsUseEncryptKey.setState((s) => value);
+                              },
+                            ),
+                            const Text('Encryption key (length = 32)'),
+                          ],
+                        ),
+                      ),
+                      const HideEncryptionKey(),
+                      const SizedBoxH(20),
+                      const HideButton(),
+                      const SizedBoxH(15),
+                      const HideResult(),
                     ],
                   ),
                 );

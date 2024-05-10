@@ -13,15 +13,30 @@ class SeekImageSelected extends StatelessWidget {
             child: OnFormBuilder(
               listenTo: _dt.rxForm,
               builder: () {
-                return const SingleChildScrollView(
+                return SingleChildScrollView(
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      SeekPickedImageTile(),
-                      SizedBoxH(20),
-                      SeekButton(),
-                      SizedBoxH(20),
-                      SeekHiddenMessage(),
+                      const SeekPickedImageTile(),
+                      const SizedBoxH(10),
+                      OnReactive(
+                        () => Row(
+                          children: [
+                            Checkbox(
+                              value: _dt.rxIsUseEncryptKey.st,
+                              onChanged: (value) {
+                                _dt.rxIsUseEncryptKey.setState((s) => value);
+                              },
+                            ),
+                            const Text('Encryption key (length = 32)'),
+                          ],
+                        ),
+                      ),
+                      const SeekEncryptionKey(),
+                      const SizedBoxH(20),
+                      const SeekButton(),
+                      const SizedBoxH(20),
+                      const SeekHiddenMessage(),
                     ],
                   ),
                 );

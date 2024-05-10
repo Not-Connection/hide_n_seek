@@ -7,6 +7,16 @@ class SeekData {
 
   final rxRandom = Prov.sample.st.rxRandom;
 
+  final rxIsUseEncryptKey = RM.inject<bool>(() => false);
+
+  final rxEncryptionKey = RM.injectTextEditing(
+    validateOnTyping: true,
+    validators: [
+      Validate.isNotEmpty,
+      Validate.mustBeEqual,
+    ],
+  );
+
   final rxImageFile = RM.inject<File?>(() => null);
 
   final rxImagePathRaw = RM.inject<String>(() => '');
@@ -15,6 +25,8 @@ class SeekData {
 
   final rxForm = RM.injectForm(
     submit: () async {
+      await Future.delayed(200.milliseconds);
+
       await _ct.revealMessage();
     },
     autovalidateMode: AutovalidateMode.onUserInteraction,

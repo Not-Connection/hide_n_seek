@@ -56,13 +56,22 @@ class HideCtrl {
   }
 
   Future<void> hideMessage() async {
+    // _dt.rxIsLoading.st = true;
     String message = _dt.rxMessage.text;
 
     _dt.rxImageFile.st = File(_dt.rxPickedFile.st!.path);
-    Steganograph.encode(image: File(_dt.rxImageFile.st!.path), message: message).then((encodedImage) {
+    await Steganograph.encode(
+      image: File(
+        _dt.rxImageFile.st!.path,
+      ),
+      message: message,
+      encryptionKey: _dt.rxIsUseEncryptKey.st ? _dt.rxEncryptionKey.controller.text : null,
+    ).then((encodedImage) async {
+      await Future.delayed(200.milliseconds);
       _dt.rxImageFile.st = File(encodedImage!.path);
       _dt.rxHiddenMessage.st = 'Message hidden successfully!';
       _dt.rxMessage.reset();
+
       _pv.rxPreviousImage.st = XFile(_dt.rxImageFile.st!.path);
     });
   }

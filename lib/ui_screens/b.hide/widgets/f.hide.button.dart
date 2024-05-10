@@ -7,19 +7,30 @@ class HideButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return OnFormBuilder(
-      listenTo: _dt.rxForm,
-      builder: () {
-        return OnFormSubmissionBuilder(
-          listenTo: _dt.rxForm,
-          onSubmitting: () => const CircularProgressIndicator(),
-          child: ElevatedButton.icon(
-            icon: const Icon(Icons.lock),
-            label: const Text('Hide Message'),
-            onPressed: _dt.rxForm.isValid ? () => _ct.submit() : null,
-          ),
-        );
-      },
+    return OnReactive(
+      () => OnFormBuilder(
+        listenTo: _dt.rxForm,
+        builder: () {
+          return OnFormSubmissionBuilder(
+              listenTo: _dt.rxForm,
+              onSubmitting: () => const CircularProgressIndicator(),
+              child: OnReactive(
+                () => _dt.rxForm.isWaiting
+                    ? const CircularProgressIndicator()
+                    : ElevatedButton.icon(
+                        icon: const Icon(Icons.lock),
+                        label: const Text('Hide Message'),
+                        onPressed: _dt.rxIsUseEncryptKey.st
+                            ? _dt.rxForm.isValid
+                                ? () => _ct.submit()
+                                : null
+                            : _dt.rxMessage.controller.text.isNotEmpty
+                                ? () => _ct.submit()
+                                : null,
+                      ),
+              ));
+        },
+      ),
     );
   }
 }

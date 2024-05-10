@@ -46,7 +46,12 @@ class SeekCtrl {
 
     logx.w(_dt.rxImageFile.st!.path.toString());
 
-    Steganograph.decode(image: File(_dt.rxImageFile.st!.path)).then((decodedMessage) {
+    await Steganograph.decode(
+      image: File(_dt.rxImageFile.st!.path),
+      encryptionKey: _dt.rxIsUseEncryptKey.st ? _dt.rxEncryptionKey.controller.text : null,
+    ).then((decodedMessage) async {
+      await Future.delayed(200.milliseconds);
+
       logx.i('decode message: $decodedMessage');
       if (decodedMessage != null) {
         _dt.rxMessage.controller.text = decodedMessage;
