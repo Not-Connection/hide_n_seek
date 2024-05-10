@@ -20,16 +20,17 @@ class SeekImageButton extends StatelessWidget {
           onPressed: () async {
             if (_pv.rxPreviousImage.st == null) {
               await _ct.pickImage();
+            } else {
+              nav.toDialog(
+                _ct.imagePickerDialog(onPreviousImagePressed: () {
+                  _dt.rxPickedFile.st = _sv.pickedPreviousEncodedImage();
+                  nav.back();
+                }, onGalleryPressed: () async {
+                  await _ct.pickImage();
+                  nav.back();
+                }),
+              );
             }
-            nav.toDialog(
-              _ct.imagePickerDialog(onPreviousImagePressed: () {
-                _dt.rxPickedFile.st = _sv.pickedPreviousEncodedImage();
-                nav.back();
-              }, onGalleryPressed: () async {
-                await _ct.pickImage();
-                nav.back();
-              }),
-            );
           },
         ),
         const SizedBoxH(20),

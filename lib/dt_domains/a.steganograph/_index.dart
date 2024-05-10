@@ -1,5 +1,7 @@
+import 'dart:io';
 import 'dart:math';
 
+import 'package:flutter/cupertino.dart';
 import 'package:share_plus/share_plus.dart';
 import 'package:states_rebuilder/states_rebuilder.dart';
 

@@ -7,6 +7,8 @@ class SeekCtrl {
 
   updateRandom() => Serv.sample.updateRandom();
 
+  void showImagePreview(String name, String path) => _sv.showImagePreview(name, path);
+
   Future<void> pickImage() async {
     final picker = ImagePicker();
     final pickedImage = await picker.pickImage(source: ImageSource.gallery);

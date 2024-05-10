@@ -26,3 +26,4 @@ part 'widgets/g.hide.result.dart';
 HideData get _dt => Data.hide.st;
 HideCtrl get _ct => Ctrl.hide;
 SteganographProv get _pv => Prov.steganograph.st;
+SteganographServ get _sv => Serv.steganograph;
